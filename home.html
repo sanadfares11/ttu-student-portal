@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة الطالب - جامعة الطفيلة التقنية</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    }
+
+    body {
+      position: relative;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.20), transparent 28%),
+        radial-gradient(circle at 85% 75%, rgba(255,255,255,.08), transparent 30%),
+        linear-gradient(135deg, #39a9dd 0%, #1688c7 48%, #0875b8 100%);
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      width: 900px;
+      height: 900px;
+      left: -280px;
+      bottom: -520px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.07);
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      width: 760px;
+      height: 760px;
+      right: -260px;
+      top: -300px;
+      border-radius: 50%;
+      background: rgba(0,65,125,.10);
+    }
+
+    .desktop {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+    }
+
+    .student-note {
+      position: absolute;
+      top: 28px;
+      right: 48px;
+      width: 225px;
+      min-height: 265px;
+      padding: 38px 20px 22px;
+      background: rgba(239, 249, 239, .78);
+      box-shadow: 0 7px 18px rgba(0,0,0,.15);
+      transform: rotate(-5deg);
+      color: #193b50;
+      text-align: right;
+      backdrop-filter: blur(2px);
+    }
+
+    .student-note::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      right: 35px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #e76b73 0 22%, #9d2634 45%, #671c27 75%);
+      box-shadow: 0 2px 4px rgba(0,0,0,.3);
+    }
+
+    .student-note p {
+      margin: 0 0 15px;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .student-note .name {
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 19px;
+    }
+
+    .shortcuts {
+      position: absolute;
+      top: 58px;
+      left: 42px;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .shortcut {
+      width: 110px;
+      text-align: center;
+      color: #073d61;
+      text-decoration: none;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .icon-box {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 3px 3px rgba(0,0,0,.15));
+      transition: transform .15s ease;
+    }
+
+    .shortcut-label {
+      display: inline-block;
+      padding: 2px 5px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #063c5e;
+      text-shadow: 0 1px 1px rgba(255,255,255,.35);
+    }
+
+    .shortcut:hover .icon-box {
+      transform: scale(1.08);
+    }
+
+    .shortcut:hover .shortcut-label {
+      text-decoration: underline;
+    }
+
+    /* جريدة */
+    .icon-news {
+      position: relative;
+      width: 48px;
+      height: 56px;
+      background: linear-gradient(135deg, #f8f8f8, #cfd7dc);
+      border: 2px solid #6c8792;
+      border-radius: 3px;
+      box-shadow: 2px 3px 0 rgba(0,0,0,.15);
+    }
+
+    .icon-news::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 28px;
+      height: 7px;
+      background: #6aa7c5;
+      box-shadow:
+        0 13px 0 #9ab1bc,
+        0 22px 0 #9ab1bc,
+        0 31px 0 #9ab1bc;
+    }
+
+    /* كشف العلامات */
+    .icon-grades {
+      position: relative;
+      width: 48px;
+      height: 57px;
+      background: linear-gradient(#fff, #dfe9ee);
+      border: 2px solid #668795;
+      border-radius: 3px;
+      box-shadow: 2px 3px 0 rgba(0,0,0,.15);
+    }
+
+    .icon-grades::before {
+      content: "";
+      position: absolute;
+      top: 9px;
+      left: 7px;
+      width: 31px;
+      height: 4px;
+      background: #337da0;
+      box-shadow:
+        0 10px 0 #7f9eaa,
+        0 20px 0 #7f9eaa,
+        0 30px 0 #7f9eaa;
+    }
+
+    .icon-grades::after {
+      content: "✓";
+      position: absolute;
+      left: 13px;
+      bottom: -5px;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #238b52;
+      color: white;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+
+    /* تسجيل المواد */
+    .icon-register {
+      width: 50px;
+      height: 58px;
+      border: 3px solid #e9f0f4;
+      border-radius: 4px;
+      background: linear-gradient(#ffffff, #dce8ee);
+      position: relative;
+      box-shadow: 2px 3px 0 rgba(0,0,0,.18);
+    }
+
+    .icon-register::before {
+      content: "";
+      position: absolute;
+      left: 9px;
+      right: 9px;
+      top: 15px;
+      height: 4px;
+      background: #4e8ba8;
+      box-shadow: 0 12px 0 #4e8ba8, 0 24px 0 #4e8ba8;
+    }
+
+    .icon-register::after {
+      content: "+";
+      position: absolute;
+      top: 2px;
+      right: 4px;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: #35a853;
+      color: white;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 17px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="desktop">
+
+    <div class="shortcuts">
+
+      <!-- جريدة موادي: محجوبة -->
+      <a class="shortcut" href="#" onclick="showBlocked(event)">
+        <div class="icon-box">
+          <div class="icon-news"></div>
+        </div>
+        <span class="shortcut-label">جريدة موادي</span>
+      </a>
+
+      <!-- كشف العلامات: يفتح الكشف المستخدم سابقاً -->
+      <a class="shortcut" href="grades.html" title="كشف العلامات">
+        <div class="icon-box">
+          <div class="icon-grades"></div>
+        </div>
+        <span class="shortcut-label">كشف العلامات</span>
+      </a>
+
+      <!-- تسجيل المواد: تم التسجيل -->
+      <a class="shortcut" href="#" onclick="showRegistered(event)">
+        <div class="icon-box">
+          <div class="icon-register"></div>
+        </div>
+        <span class="shortcut-label">تسجيل المواد</span>
+      </a>
+
+    </div>
+
+    <section class="student-note">
+      <p class="name">سند موفق عبد الكريم فارس</p>
+      <p>كلية الهندسة</p>
+      <p>الهندسة الميكانيكية/المركبات</p>
+      <p>على مقاعد الدراسة</p>
+    </section>
+
+  </main>
+
+  <script>
+    function showBlocked(event) {
+      event.preventDefault();
+      alert("تم حجب هذه الخدمة");
+    }
+
+    function showRegistered(event) {
+      event.preventDefault();
+      alert("تم تسجيلك");
+    }
+  </script>
+</body>
+</html>
